@@ -57,7 +57,6 @@
           },
           finalizar(){
              clearInterval(this.cronometro);
-             // this.tempoEmSegundos=0;
           },
 
       }
