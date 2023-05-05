@@ -1,30 +1,34 @@
 <template>
     <div class="is-flex is-align-items-center is-justify-content-space-between">
         <Cronometro :tempoEmSegundos="tempoEmSegundos" />
-        <button class="button" @click="iniciar" :disabled="cronometroRodando">
-                  <span class="icon">
-                      <i class="fas fa-play"></i>
-                  </span>
-            <span>Play</span>
-        </button>
-        <button class="button" @click="finalizar" :disabled="!cronometroRodando">
-                  <span class="icon">
-                      <i class="fas stop"></i>
-                  </span>
-            <span>Stop</span>
-        </button>
+        <botao :btn-text="'Play'" :btn-icon="'fas fa-play'" @aoBtnClicked="iniciar" :is-disabled="cronometroRodando"/>
+        <botao :btn-text="'Stop'" :btn-icon="'fas fa-stop'" @aoBtnClicked="finalizar" :is-disabled="!cronometroRodando" />
+<!--        <button class="button" @click="iniciar" :disabled="cronometroRodando">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fas fa-play"></i>-->
+<!--                  </span>-->
+<!--            <span>Play</span>-->
+<!--        </button>-->
+<!--        <button class="button" @click="finalizar" :disabled="!cronometroRodando">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fas stop"></i>-->
+<!--                  </span>-->
+<!--            <span>Stop</span>-->
+<!--        </button>-->
     </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 import Cronometro from "@/components/Cronometro.vue";
+import Botao from "@/components/Botao.vue";
 
 export default defineComponent({
     name:`Temporizador`,
     emits: ['aoTemporizadorFinalizado'],
     components:{
-        Cronometro
+        Cronometro,
+        Botao
     },
     data (){
         return {
@@ -53,9 +57,6 @@ export default defineComponent({
 
 </script>
 
-
-
-
-<style scoped>
+<style >
 
 </style>
