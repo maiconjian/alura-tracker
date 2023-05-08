@@ -17,7 +17,7 @@ export const store = createStore<Estado>({
                 nome: nomeDoProjeto
             } as IProjeto
             state.projetos.push(projeto);
-        }
+        },
     }
 });
 
