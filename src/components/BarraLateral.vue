@@ -6,6 +6,23 @@
       <button class="button" @click="alterarTema">
           {{textoBotao}}
       </button>
+      <nav class="panel mt-5">
+          <ul>
+              <li>
+                  <router-link to="/" class="link">
+                      <i class="fas fa-tasks"></i>
+                      Tarefas
+                  </router-link>
+              </li>
+              <li>
+                  <router-link to="/projetos" class="link">
+                      <i class="fas fa-project-diagram"></i>
+                      Projetos
+                  </router-link>
+              </li>
+
+          </ul>
+      </nav>
   </header>
 
 </template>
@@ -39,11 +56,16 @@ export default defineComponent({
 </script>
 
 <style>
+
+strong{
+    color: #f95738;
+}
+
 header{
     background: #0d3b66;
     width: 100%;
     height: 100vh;
-    padding: 1rem;
+    padding: 2rem;
     text-align: center;
 }
 
@@ -53,5 +75,19 @@ header{
         height: auto;
     }
 
+}
+
+.panel li{
+    margin: 8px 0;
+    text-align: start;
+}
+.link{
+    color: #ffffff;
+}
+.link:hover{
+    color: #FAF0CA;
+}
+.link.router-link-active{
+    color: #FAF0CA;
 }
 </style>
