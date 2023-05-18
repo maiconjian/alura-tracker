@@ -9,11 +9,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {computed, defineComponent} from 'vue';
 import Formulario from "@/components/Formulario.vue";
 import Box from "@/components/Box.vue";
 import Tarefa from "@/components/Tarefa.vue";
 import ITarefa from "../interfaces/ITarefa";
+import {useStore} from "@/store";
+import {NOTIFICAR} from "@/store/tipo-mutacoes";
+import {TipoNotificacao} from "@/interfaces/INotificacao";
 
 export default defineComponent({
     name: 'App',
@@ -35,6 +38,8 @@ export default defineComponent({
     methods: {
         salvarTarefa(tarefa: ITarefa) {
             this.tarefas.push(tarefa);
+
+
         },
     }
 });
