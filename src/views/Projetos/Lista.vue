@@ -42,28 +42,32 @@
 
 import {computed, defineComponent} from "vue";
 import {useStore} from "@/store";
-import IProjeto from "@/interfaces/IProjeto";
 import {EXCLUIR_PROJETO, NOTIFICAR} from "@/store/tipo-mutacoes";
 import {TipoNotificacao} from "@/interfaces/INotificacao";
+import {OBTER_PROJETOS, REMOVER_PROJETOS} from "@/store/tipo-acoes";
+import useNotificador from "@/hooks/notificador";
 
 export default defineComponent({
     name: `Lista`,
     methods:{
         excluir(idProjeto:string){
-           this.store.commit(EXCLUIR_PROJETO, idProjeto);
-           this.store.commit(NOTIFICAR,{
-               titulo:'Sucesso',
-               texto:'Projeto excluido!',
-               tipo:TipoNotificacao.SUCESSO
+           this.store.dispatch(REMOVER_PROJETOS, idProjeto).then(()=>{
+                this.lidarComSucesso('Projeto excluido!');
            })
-           this.$router.push("/projetos");
+
+        },
+        lidarComSucesso(texto:string){
+            this.notificar('Sucesso',texto, TipoNotificacao.SUCESSO)
         }
     },
     setup() {
         const store = useStore()
+            store.dispatch(OBTER_PROJETOS);
+        const {notificar} = useNotificador();
         return {
-            projetos: computed(() => store.state.projetos),
-            store
+            projetos: computed(() => store.state.projeto.projetos),
+            store,
+            notificar
         }
     }
 })

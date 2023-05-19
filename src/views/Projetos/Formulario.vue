@@ -20,11 +20,10 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
-import {store, useStore} from "@/store";
-import {ADICIONA_PROJETO, ALTERA_PROJETO} from "@/store/tipo-mutacoes";
+import {useStore} from "@/store";
 import {TipoNotificacao} from "@/interfaces/INotificacao";
-import {notificacaoMixin} from "@/mixins/notificar";
 import useNotificador from "@/hooks/notificador";
+import {ALTERAR_PROJETOS, CADASTRAR_PROJETOS} from "@/store/tipo-acoes";
 
 export default defineComponent({
     name: `Formulario`,
@@ -42,8 +41,7 @@ export default defineComponent({
     mounted() {
         console.log(this.id);
         if (this.id) {
-            const projeto = this.store.state.projetos.find(proj => proj.id == this.id);
-            console.log(projeto);
+            const projeto = this.store.state.projeto.projetos.find(proj => proj.id == this.id);
             this.nomeDoProjeto = projeto?.nome || '';
         }
     },
@@ -53,18 +51,21 @@ export default defineComponent({
     methods: {
         salvar() {
             if (this.id) {
-                this.store.commit(ALTERA_PROJETO,{
+                this.store.dispatch(ALTERAR_PROJETOS,{
                     id:this.id,
                     nome:this.nomeDoProjeto
-                })
+                }).then(()=>  this.lidarComSucesso("Projeto Alterado!"))
                 this.notificar('Sucesso','Projeto alterado!',TipoNotificacao.SUCESSO)
             } else {
-                    this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto),
-                    this.nomeDoProjeto = '';
-                this.notificar('Sucesso','Projeto salvo!',TipoNotificacao.SUCESSO)
+                    this.store.dispatch(CADASTRAR_PROJETOS, this.nomeDoProjeto).then(()=>{
+                      this.lidarComSucesso("Projeto salvo!")
+                    })
             }
+        },
+        lidarComSucesso(texto:string){
+            this.nomeDoProjeto = '';
+            this.notificar('Sucesso',texto,TipoNotificacao.SUCESSO)
             this.$router.push("/projetos");
-
         }
     },
     setup() {

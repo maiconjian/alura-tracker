@@ -1,0 +1,41 @@
+{
+  "projetos": [
+    {
+      "id": 1,
+      "nome": "Alura Tracker"
+    },
+    {
+      "id": 2,
+      "nome": "Estudos Pessoais"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "duracaoEmSegundo": 120,
+      "descricao": "Configuração do ambiente  1",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker"
+      }
+    },
+    {
+      "duracaoEmSegundo": 4,
+      "descricao": "Refatoração",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker"
+      },
+      "id": 2
+    },
+    {
+      "duracaoEmSegundo": 2,
+      "descricao": "Vue",
+      "projeto": {
+        "id": 2,
+        "nome": "Alura Tracker"
+      },
+      "id": 3
+    }
+  ]
+}
