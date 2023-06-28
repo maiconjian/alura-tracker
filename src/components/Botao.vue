@@ -15,6 +15,7 @@ export default defineComponent({
     name:`Botao`,
     emits:['aoBtnClicked'],
     props:{
+        // enteDeclaradosUtilidadePublicaEstadual
         isDisabled:{
             type:Boolean,
             default:false
